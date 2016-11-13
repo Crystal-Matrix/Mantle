@@ -362,13 +362,13 @@ static NSUInteger modelVersion = 1;
 	return [NSSet setWithObject:@"name"];
 }
 
-- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModel>)model {
+- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModelProtocol>)model {
 	if ([key isEqualToString:@"name"]) {
 		self.name = [model dictionaryValue][@"name"];
 	}
 }
 
-- (void)mergeValuesForKeysFromModel:(id<MTLModel>)model {
+- (void)mergeValuesForKeysFromModel:(id<MTLModelProtocol>)model {
 	self.name = [model dictionaryValue][@"name"];
 }
 

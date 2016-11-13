@@ -35,7 +35,7 @@ typedef enum : NSUInteger {
 /// Clients that wish to implement their own adapters should target classes
 /// conforming to this protocol rather than subclasses of MTLModel to ensure
 /// maximum compatibility.
-@protocol MTLModel <NSObject, NSCopying>
+@protocol MTLModelProtocol <NSObject, NSCopying>
 
 /// Initializes a new instance of the receiver using key-value coding, setting
 /// the keys and values in the given dictionary.
@@ -78,7 +78,7 @@ typedef enum : NSUInteger {
 
 /// Merges the value of the given key on the receiver with the value of the same
 /// key from the given model object, giving precedence to the other model object.
-- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModel>)model;
+- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModelProtocol>)model;
 
 /// Returns the keys for all @property declarations, except for `readonly`
 /// properties without ivars, or properties on MTLModel itself.
@@ -99,7 +99,7 @@ typedef enum : NSUInteger {
 ///
 /// The default implementations of <NSCopying>, -hash, and -isEqual: make use of
 /// the +propertyKeys method.
-@interface MTLModel : NSObject <MTLModel>
+@interface MTLModel : NSObject <MTLModelProtocol>
 
 /// Initializes the receiver using key-value coding, setting the keys and values
 /// in the given dictionary.
@@ -123,13 +123,13 @@ typedef enum : NSUInteger {
 /// By default, this method looks for a `-merge<Key>FromModel:` method on the
 /// receiver, and invokes it if found. If not found, and `model` is not nil, the
 /// value for the given key is taken from `model`.
-- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModel>)model;
+- (void)mergeValueForKey:(NSString *)key fromModel:(id<MTLModelProtocol>)model;
 
 /// Merges the values of the given model object into the receiver, using
 /// -mergeValueForKey:fromModel: for each key in +propertyKeys.
 ///
 /// `model` must be an instance of the receiver's class or a subclass thereof.
-- (void)mergeValuesForKeysFromModel:(id<MTLModel>)model;
+- (void)mergeValuesForKeysFromModel:(id<MTLModelProtocol>)model;
 
 /// The storage behavior of a given key.
 ///

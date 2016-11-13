@@ -13,7 +13,7 @@
 @implementation NSDictionary (MTLMappingAdditions)
 
 + (NSDictionary *)mtl_identityPropertyMapWithModel:(Class)modelClass {
-	NSCParameterAssert([modelClass conformsToProtocol:@protocol(MTLModel)]);
+	NSCParameterAssert([modelClass conformsToProtocol:@protocol(MTLModelProtocol)]);
 
 	NSArray *propertyKeys = [modelClass propertyKeys].allObjects;
 

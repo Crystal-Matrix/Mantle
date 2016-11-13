@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MTLModel;
+@protocol MTLModelProtocol;
 @protocol MTLTransformerErrorHandling;
 
 /// A MTLModel object that supports being parsed from and serialized to JSON.
-@protocol MTLJSONSerializing <MTLModel>
+@protocol MTLJSONSerializing <MTLModelProtocol>
 @required
 
 /// Specifies how to map property keys to different key paths in JSON.
