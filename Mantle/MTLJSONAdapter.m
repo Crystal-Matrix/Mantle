@@ -613,11 +613,11 @@ NSString * const MTLJSONAdapterThrownExceptionErrorKey = @"MTLJSONAdapterThrownE
 					continue;
 				}
 				
-				if (![model isKindOfClass:MTLModel.class]) {
+				if (![model conformsToProtocol:@protocol(MTLModel)]) {
 					if (error != NULL) {
 						NSDictionary *userInfo = @{
 							NSLocalizedDescriptionKey: NSLocalizedString(@"Could not convert JSON array to model array", @""),
-							NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Expected a MTLModel or an NSNull, got: %@.", @""), model],
+							NSLocalizedFailureReasonErrorKey: [NSString stringWithFormat:NSLocalizedString(@"Expected an object conforming to MTLModel or an NSNull, got: %@.", @""), model],
 							MTLTransformerErrorHandlingInputValueErrorKey : model
 						};
 						
